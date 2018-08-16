@@ -5,4 +5,7 @@
     <string name="navigation_menu_title_user">Användare</string>
 
     <string name="blank_fragment">Not yet implemented</string>
+    <string name="kontantinsats">Kontantinsats:</string>
+
+    <string name="downPayment">Kontantinsats: %1$s</string>
 </resources>

@@ -4,13 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalculateFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CalculateFragment"
+    android:layout_marginStart="@dimen/margin_start"
+    android:layout_marginEnd="@dimen/margin_end">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="@string/blank_fragment"/>
+        android:id="@+id/consideration_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Köpeskilling (kr)"
+        android:layout_marginTop="@dimen/margin_start"
+        style="@style/CalculateTextViewTheme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/consideration_editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:autofillHints="Köpeskilling"
+        android:hint="Köpes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/consideration_textView"/>
+
+
+    <TextView
+        android:id="@+id/downPayment_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/CalculateTextViewTheme"
+        android:text="@string/kontantinsats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/consideration_editText"/>
+
+    <SeekBar
+        android:id="@+id/downPayment_seekBar"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="@dimen/margin_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/downPayment_Percentage"
+        app:layout_constraintTop_toBottomOf="@id/downPayment_textView"/>
+
+    <TextView
+        android:id="@+id/downPayment_Percentage"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:text="15%"
+        android:gravity="end"
+        app:layout_constraintStart_toEndOf="@id/downPayment_seekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/downPayment_seekBar"
+        app:layout_constraintBottom_toBottomOf="@id/downPayment_seekBar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
