@@ -3,4 +3,6 @@
     <string name="navigation_menu_title_calculate">Beräkna</string>
     <string name="navigation_menu_title_favorite">Favoriter</string>
     <string name="navigation_menu_title_user">Användare</string>
+
+    <string name="blank_fragment">Not yet implemented</string>
 </resources>

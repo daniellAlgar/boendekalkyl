@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph">
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/calculateFragment">
 
+    <fragment
+        android:id="@+id/calculateFragment"
+        android:name="com.algar.boendekalkyl.CalculateFragment"
+        android:label="Calculate"
+        tools:layout="@layout/fragment_calculate">
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.algar.boendekalkyl.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite">
+    </fragment>
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.algar.boendekalkyl.UserFragment"
+        android:label="User"
+        tools:layout="@layout/fragment_user">
+    </fragment>
 </navigation>
