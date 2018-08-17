@@ -42,11 +42,10 @@ class CalculateViewModelUnitTest {
         val progress = 0
 
         val actual = viewModel.calculateDownPayment(
-                consideration = consideration,
                 progress = progress
         )
 
-        val expected = 150000
+        val expected = 0
         assertEquals(expected, actual)
     }
 
@@ -55,7 +54,6 @@ class CalculateViewModelUnitTest {
         val consideration = 1000000
 
         val actual = viewModel.calculateDownPayment(
-                consideration = consideration,
                 progress = consideration
         )
 
@@ -69,25 +67,24 @@ class CalculateViewModelUnitTest {
         val progress = 500000
 
         val actual = viewModel.calculateDownPayment(
-                consideration = consideration,
                 progress = progress
         )
 
-        val expected = 575000
+        val expected = 500000
         assertEquals(expected, actual)
     }
 
     @Test
     fun formatDownPaymentPercentage_MinDownPayment() {
         val consideration = 1000000
-        val downPayment = 150000
+        val downPayment = 0
 
         val actual = viewModel.formatDownPaymentPercentage(
                 consideration = consideration,
                 downPayment = downPayment
         )
 
-        val expected = "15 %"
+        val expected = "0 %"
         assertEquals(expected, actual)
     }
 
@@ -117,4 +114,32 @@ class CalculateViewModelUnitTest {
         val expected = "50 %"
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun calculateExtraCost() {
+        val model = CalculateModel(
+                consideration = 3000000,
+                downPayment = 450000,
+                tidigarePantbrev = 100000,
+                progress = 450000,
+                downPaymentPercentage = "15 %"
+        )
+
+        val actual = viewModel.calculateExtraCost(model = model)
+
+        val expected = 95200
+        assertEquals(expected, actual)
+    }
+
+    val a = """
+        Villan kostar 3 000 000 kr
+        Har tidigare pantbrev 100 000 kr
+        Lägger 15% kontantinsats = 450 000 kr
+
+        Lagfart = 3 000 000 * 0.015 + 825 = 45 825
+        Pantbrevskostnad = 3 000 000 - 100 000 - 450 000 = 2 450 000
+        Pantbrev = 2 450 000 * 0.02 + 375 = 49 375
+
+        Extra kostnad = 45 825 + 49 375 = 95 200
+    """.trimIndent()
 }

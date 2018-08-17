@@ -65,4 +65,52 @@
         app:layout_constraintTop_toTopOf="@id/downPayment_seekBar"
         app:layout_constraintBottom_toBottomOf="@id/downPayment_seekBar"/>
 
+    <TextView
+        android:id="@+id/pantbrev_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/CalculateTextViewTheme"
+        android:text="Tidigare Pantbrev (kr)"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/downPayment_Percentage"/>
+
+    <EditText
+        android:id="@+id/pantbrev_editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:hint="Pantbrev"
+        android:autofillHints="Pantbrev"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pantbrev_textView"/>
+
+    <TextView
+        android:id="@+id/extraCost_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/extra_kostnad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pantbrev_editText"/>
+
+    <TextView
+        android:id="@+id/totalCost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/total_cost"
+        android:layout_marginTop="@dimen/margin_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/extraCost_textView"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

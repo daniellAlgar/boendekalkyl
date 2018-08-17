@@ -20,6 +20,9 @@ class CalculateFragment : Fragment() {
     private lateinit var downPaymentTextView: TextView
     private lateinit var downPaymentSeekBar: SeekBar
     private lateinit var downPaymentPercentage: TextView
+    private lateinit var pantbrevEditText: EditText
+    private lateinit var extraCost: TextView
+    private lateinit var totalCost: TextView
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,10 +37,9 @@ class CalculateFragment : Fragment() {
                 EditorInfo.IME_ACTION_DONE -> {
                     viewModel.manualConsideration(textView.text.toString())
                     textView.clearFocus()
-                    false
                 }
-                else -> false
             }
+            false
         }
 
         downPaymentTextView = view.findViewById(R.id.downPayment_textView)
@@ -54,6 +56,19 @@ class CalculateFragment : Fragment() {
 
         })
         downPaymentPercentage = view.findViewById(R.id.downPayment_Percentage)
+
+        pantbrevEditText = view.findViewById(R.id.pantbrev_editText)
+        pantbrevEditText.setOnEditorActionListener { textView, actionId, event ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    viewModel.manualPantbrev(amount = textView.text.toString())
+                }
+            }
+            false
+        }
+
+        extraCost = view.findViewById(R.id.extraCost_textView)
+        totalCost = view.findViewById(R.id.totalCost)
 
         setupViewModel()
 
@@ -85,5 +100,16 @@ class CalculateFragment : Fragment() {
                 progress = data.progress
             }
         }
+
+        val lagfartPantbrev = viewModel.calculateExtraCost(model = data)
+        extraCost.text = String.format(
+                getString(R.string.extra_kostnad),
+                lagfartPantbrev
+        )
+
+        totalCost.text = String.format(
+                getString(R.string.total_cost),
+                lagfartPantbrev + data.downPayment
+        )
     }
 }

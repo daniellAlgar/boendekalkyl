@@ -1,13 +1,10 @@
 package com.algar.boendekalkyl
 
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class CalculateViewModel : ViewModel() {
-
-    private val minInterest = 0.15
 
     var model = MutableLiveData<CalculateModel>().apply {
         value = CalculateModel.initialModel()
@@ -16,7 +13,6 @@ class CalculateViewModel : ViewModel() {
     fun manualConsideration(amount: String) {
         val consideration = parseConsideration(amount)
         val downPayment = calculateDownPayment(
-                consideration = consideration,
                 progress = model.value!!.progress)
         val downPaymentPercentage = formatDownPaymentPercentage(
                 consideration = consideration,
@@ -32,9 +28,11 @@ class CalculateViewModel : ViewModel() {
 
     fun manualDownPaymentSeekBar(progress: Int) {
         val consideration = model.value!!.consideration
+
         val downPayment = calculateDownPayment(
-                consideration = consideration,
-                progress = progress)
+                progress = progress
+        )
+
         val downPaymentPercentage = formatDownPaymentPercentage(
                 consideration = consideration,
                 downPayment = downPayment
@@ -47,27 +45,18 @@ class CalculateViewModel : ViewModel() {
         )
     }
 
-    @VisibleForTesting
-    fun formatDownPaymentPercentage(consideration: Int, downPayment: Int): String {
-        return if (downPayment == 0) {
-            "${100*minInterest} %"
-        } else {
-            "${downPayment*100 / consideration} %"
-        }
+    fun manualPantbrev(amount: String) {
+        model.value = model.value?.copy(tidigarePantbrev = parseConsideration(amount = amount))
     }
 
     @VisibleForTesting
-    fun calculateDownPayment(consideration: Int, progress: Int): Int {
+    fun formatDownPaymentPercentage(consideration: Int, downPayment: Int): String {
+        return "${downPayment * 100 / consideration} %"
+    }
 
-        val minDownPayment = consideration * minInterest
-        val percentOfProgress = if (progress == 0) {
-            0.0f
-        } else {
-            progress.toFloat() / consideration
-        }
-
-        val scaledDownPaymentAddition = minDownPayment * (1 - percentOfProgress)
-        return (progress + scaledDownPaymentAddition).toInt()
+    @VisibleForTesting
+    fun calculateDownPayment(progress: Int): Int {
+        return progress
     }
 
     @VisibleForTesting
@@ -77,5 +66,13 @@ class CalculateViewModel : ViewModel() {
         } else {
             amount.toDouble().toInt()
         }
+    }
+
+    fun calculateExtraCost(model: CalculateModel): Int {
+        val lagfart = model.consideration * 0.015 + 825
+        val kostnadPantbrev = model.consideration - model.tidigarePantbrev - model.downPayment
+        val pantbrev = kostnadPantbrev * 0.02 + 375
+
+        return (lagfart + pantbrev).toInt()
     }
 }

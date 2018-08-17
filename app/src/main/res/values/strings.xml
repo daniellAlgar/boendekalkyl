@@ -7,5 +7,7 @@
     <string name="blank_fragment">Not yet implemented</string>
     <string name="kontantinsats">Kontantinsats:</string>
 
-    <string name="downPayment">Kontantinsats: %1$s</string>
+    <string name="downPayment">Kontantinsats: %1$s kr</string>
+    <string name="extra_kostnad">Pantbrev + lagfart: %1$s kr</string>
+    <string name="total_cost">Total kostnad: %1$s kr</string>
 </resources>
